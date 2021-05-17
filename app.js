@@ -41,7 +41,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 httpsServer.listen(443);
-httpServer.listen(8081);
+httpServer.listen(8080);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
