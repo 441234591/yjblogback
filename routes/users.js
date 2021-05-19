@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const querySql = require("../db/index");
 const {PWD_SALT,PRIVATE_KEY,EXPIRESD} = require('../utils/constant');
-const {md5} = require('../utils/index');
+const {md5,upload} = require('../utils/index');
 const jwt = require('jsonwebtoken');
 /* GET users listing. */
 router.post('/register', async function(req, res, next) {
@@ -41,6 +41,41 @@ router.post('/login',async(req,res,next) => {
           res.send({code:0,msg:'登录成功',token:token})
         }      
       }
+  }catch(e){
+    console.log(e)
+    next(e)
+  } 
+})
+
+//获取用户信息接口
+router.get('/info',async(req,res,next) => {
+  console.log(req.user);
+  let {username} = req.user
+  try {
+    let userinfo = await querySql('select nickname,head_img from user where username = ?',[username])
+    res.send({code:0,msg:'成功',data:userinfo[0]})
+  }catch(e){
+    console.log(e)
+    next(e)
+  } 
+})
+
+//头像上传接口
+router.post('/upload',upload.single('head_img'),async(req,res,next) => {
+  console.log(req.file)
+  let imgPath = req.file.path.split('public')[1]
+  let imgUrl = 'http://127.0.0.1:8000'+imgPath
+  res.send({code:0,msg:'上传成功',data:imgUrl})
+})
+
+//用户信息更新接口
+router.post('/updateUser',async(req,res,next) => {
+  let {nickname,head_img} = req.body
+  let {username} = req.user
+  try {
+    let result = await querySql('update user set nickname = ?,head_img = ? where username = ?',[nickname,head_img,username])
+    console.log(result)
+    res.send({code:0,msg:'更新成功',data:null})
   }catch(e){
     console.log(e)
     next(e)
