@@ -17,7 +17,7 @@ let upload = multer({
         let month = (date.getMonth() + 1).toString().padStart(2, '0')
         let day = date.getDate()
         let dir = path.join(__dirname,'../public/uploads/' + year + month + day)
-  
+        console.log(dir);
             // 判断目录是否存在，没有则创建
         if (!fs.existsSync(dir)) {
           fs.mkdirSync(dir, {recursive: true})
