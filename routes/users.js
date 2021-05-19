@@ -64,7 +64,7 @@ router.get('/info',async(req,res,next) => {
 router.post('/upload',upload.single('head_img'),async(req,res,next) => {
   console.log(req.file)
   let imgPath = req.file.path.split('public')[1]
-  let imgUrl = 'http://127.0.0.1:8000'+imgPath
+  let imgUrl = 'http://121.5.236.190:8000'+imgPath
   res.send({code:0,msg:'上传成功',data:imgUrl})
 })
 
