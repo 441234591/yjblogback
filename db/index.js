@@ -1,5 +1,5 @@
 const mysql = require('mysql')
-const dbOption = require('./config')
+const {dbOption} = require('../utils/constant')
 
 //创建连接池
 const pool = mysql.createPool(dbOption)

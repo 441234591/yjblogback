@@ -12,6 +12,8 @@ const {PRIVATE_KEY} = require('./utils/constant');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var articleRouter = require('./routes/article');
+var commentRouter = require('./routes/comment');
 
 var app = express();
 
@@ -49,6 +51,8 @@ app.use('/',(req,res,next)=>{
 
 app.use('/', indexRouter);
 app.use('/api/user', usersRouter);
+app.use('/api/article',articleRouter);
+app.use('/api/comment',commentRouter);
 
 httpsServer.listen(443);
 httpServer.listen(8000);

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const querySql = require("../db/index");
-const {PWD_SALT,PRIVATE_KEY,EXPIRESD} = require('../utils/constant');
+const {PWD_SALT,PRIVATE_KEY,EXPIRESD,BASE_URL} = require('../utils/constant');
 const {md5,upload} = require('../utils/index');
 const jwt = require('jsonwebtoken');
 /* GET users listing. */
@@ -64,7 +64,7 @@ router.get('/info',async(req,res,next) => {
 router.post('/upload',upload.single('head_img'),async(req,res,next) => {
   console.log(req.file)
   let imgPath = req.file.path.split('public')[1]
-  let imgUrl = 'http://121.5.236.190:8000'+imgPath
+  let imgUrl = BASE_URL+imgPath
   res.send({code:0,msg:'上传成功',data:imgUrl})
 })
 
