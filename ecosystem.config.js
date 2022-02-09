@@ -11,7 +11,7 @@ module.exports = {
       user : 'root',
       host : '121.5.236.190',
       ref  : 'origin/master',
-      repo : 'git@github.com-441234591/yjblogback.git',
+      repo : 'git@github.com:441234591/yjblogback.git',
       path : '/www/wwwroot',
       ssh_options:"StrictHostKeyChecking=no",
       'pre-deploy-local': '',
