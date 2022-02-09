@@ -37,7 +37,8 @@ router.post('/login',async(req,res,next) => {
         if(!result || result.length === 0){
           res.send({code:-1,msg:'账号或者密码不正确'})
         }else{
-          let token = jwt.sign({username},PRIVATE_KEY,{expiresIn:EXPIRESD})
+          let token = jwt.sign({username,password},PRIVATE_KEY,{expiresIn:EXPIRESD})
+          console.log(token);
           res.send({code:0,msg:'登录成功',token:token})
         }      
       }
